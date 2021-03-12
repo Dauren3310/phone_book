@@ -1,0 +1,10 @@
+.Layout-Content {
+  margin-top: 75px;
+  min-height: calc(100vh - 135px);
+}
+.footer {
+  height: 60px;
+  background-color: #703b09;
+  text-align: center;
+  color: #fff;
+}
