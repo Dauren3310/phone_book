@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { createContact } from '../../store/actions/actions';
 
 const AddContactForm = props => {
 
@@ -9,6 +11,9 @@ const AddContactForm = props => {
     email: '',
     photo: ''
   });
+  
+  const loading = useSelector(state => state.loading);
+  const dispatch = useDispatch();
 
   const changeInputHandler = e => {
     const {name, value} = e.target;
@@ -17,7 +22,8 @@ const AddContactForm = props => {
 
   const createNewContact = e => {
     e.preventDefault();
-    console.log(inputValues);
+    dispatch(createContact(inputValues));
+    props.history.push('/')
   }
 
   const backToContacts = () => props.history.push('/');
