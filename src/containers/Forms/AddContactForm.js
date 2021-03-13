@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import Spinner from '../../components/UI/Spinner/Spinner';
 import { createContact } from '../../store/actions/actions';
 
 const AddContactForm = props => {
@@ -39,6 +40,7 @@ const AddContactForm = props => {
 
   return (
     <div className='container'>
+      {loading ? <Spinner /> : null} 
       <Form onSubmit={createNewContact}>
         <h3>Add new contact</h3>
         <Form.Group>

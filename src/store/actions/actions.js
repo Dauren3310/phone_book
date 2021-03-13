@@ -13,6 +13,10 @@ const setContactInfo = (contact) => {
   return {type: SET_CONTACT_INFO, contact}
 }
 
+const setContacts = contacts => {
+  return {type: SET_CONTACTS, contacts};
+}
+
 export const createContact = contact => {
   return async dispatch => {
     try {
@@ -32,7 +36,7 @@ export const fetchContacts = () => {
       dispatch(startRequest());
       const response = await axios.get('contacts.json');
       const contacts = Object.keys(response.data).map(id => ({...response.data[id], id}));
-      dispatch({type: SET_CONTACTS, contacts});    
+      dispatch(setContacts(contacts));    
     } catch(e) {
       console.log(e);
     }
@@ -56,9 +60,9 @@ export const deleteContact = id => {
   return async dispatch => {
     try {
       dispatch(startRequest());
-      const response = await axios.delete(`contacts/${id}.json`);
-      dispatch(fetchContacts());
+      await axios.delete(`contacts/${id}.json`);
       dispatch(setShowModal(false));
+      dispatch(fetchContacts());
     } catch(e) {
       console.log(e);
     }
@@ -71,7 +75,7 @@ export const editContact = contact => {
       dispatch(startRequest());
       const contactWithoutId = {...contact};
       delete contactWithoutId.id;
-      const response = await axios.put(`contacts/${contact.id}.json`, contactWithoutId);
+      await axios.put(`contacts/${contact.id}.json`, contactWithoutId);
       dispatch(fetchContacts());
     } catch(e) {
       console.log(e);

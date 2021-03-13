@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import Spinner from '../../components/UI/Spinner/Spinner';
 import { editContact, showContact } from '../../store/actions/actions';
 
 const EditContactForm = props => {
@@ -19,7 +20,7 @@ const EditContactForm = props => {
   useEffect(() => {
     dispatch(showContact(props.match.params.id));
     setInputValues({...contactInfo});
-  }, [dispatch]);
+  }, [dispatch, props.match.params.id]);
 
   const changeInputHandler = e => {
     const {name, value} = e.target;
@@ -44,6 +45,7 @@ const EditContactForm = props => {
 
   return (
     <div className='container'>
+      {loading ? <Spinner /> : null} 
       <Form onSubmit={editContactHandler}>
         <h3>Edit contact</h3>
         <Form.Group>
