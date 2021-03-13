@@ -4,9 +4,7 @@ import NavigationItem from './NavigationItem/NavigationItem';
 const NavigationItems = () => {
   return (
     <ul className="NavigationItems">
-      <NavigationItem to="/" exact>Page 1</NavigationItem>
-      <NavigationItem to="/page-2">Page 2</NavigationItem>
-      <NavigationItem to="/page-3">Page 3</NavigationItem>
+      <NavigationItem to="/add-new-contact">Add new contact</NavigationItem>
     </ul>
   );
 };
