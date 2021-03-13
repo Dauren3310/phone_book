@@ -4,6 +4,7 @@ import Layout from './components/Layout/Layout';
 import Home from './containers/Home/Home';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AddContactForm from './containers/Forms/AddContactForm';
+import EditContactForm from './containers/Forms/EditContactForm';
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/add-new-contact" component={AddContactForm} />
+        <Route path="/contacts/:id/edit-contact" component={EditContactForm} />
         <Route render={() => {
           return <h1>Page not found</h1>;
         }} />

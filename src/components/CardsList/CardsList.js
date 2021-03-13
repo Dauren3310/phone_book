@@ -1,6 +1,6 @@
 import CardItem from "./CardItem/CardItem";
 
-const CardsList = ({contacts}) => {
+const CardsList = ({contacts, showContactInfo}) => {
   return (
     <div>
       {
@@ -8,6 +8,7 @@ const CardsList = ({contacts}) => {
           return (
             <CardItem 
               key={contact.id}
+              showContactInfo={() => showContactInfo(contact.id)}
               contact={contact}
             />
           )

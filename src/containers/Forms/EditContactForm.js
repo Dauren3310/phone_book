@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { createContact } from '../../store/actions/actions';
+import { editContact, showContact } from '../../store/actions/actions';
 
-const AddContactForm = props => {
+const EditContactForm = props => {
 
   const [inputValues, setInputValues] = useState({
     name: '',
@@ -13,21 +13,26 @@ const AddContactForm = props => {
   });
   
   const loading = useSelector(state => state.loading);
+  const contactInfo = useSelector(state => state.contactInfo);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(showContact(props.match.params.id));
+    setInputValues({...contactInfo});
+  }, [dispatch]);
 
   const changeInputHandler = e => {
     const {name, value} = e.target;
     setInputValues(prevState => ({...prevState, [name]: value}));
   };
 
-  const createNewContact = e => {
+  const editContactHandler = e => {
     e.preventDefault();
-    dispatch(createContact(inputValues));
-    props.history.push('/')
+    dispatch(editContact(inputValues));
+    props.history.push('/');
   }
 
   const backToContacts = () => props.history.push('/');
-
 
   const image = (
     <img
@@ -39,8 +44,8 @@ const AddContactForm = props => {
 
   return (
     <div className='container'>
-      <Form onSubmit={createNewContact}>
-        <h3>Add new contact</h3>
+      <Form onSubmit={editContactHandler}>
+        <h3>Edit contact</h3>
         <Form.Group>
           <Form.Label>Name</Form.Label>
           <Form.Control
@@ -116,4 +121,4 @@ const AddContactForm = props => {
   );
 };
 
-export default AddContactForm;
+export default EditContactForm;
