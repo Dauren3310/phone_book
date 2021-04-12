@@ -10,7 +10,7 @@ const App = () => {
   return (
     <Layout>
       <Switch>
-        <Route path={["/", "phone_book"]} exact component={Home} />
+        <Route path={["/", "/phone_book"]} exact component={Home} />
         <Route path="/add-new-contact" component={AddContactForm} />
         <Route path="/contacts/:id/edit-contact" component={EditContactForm} />
         <Route render={() => {
